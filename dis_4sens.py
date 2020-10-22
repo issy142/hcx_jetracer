@@ -11,6 +11,8 @@
 #sensor2:rightrear
 #sensor3:left
 #sensor4:front
+
+print("dis_4sens.py is being read.")
  
 import time
 import RPi.GPIO as GPIO
@@ -49,8 +51,10 @@ GPIO.setup(sens2_in,GPIO.IN)
 GPIO.setup(sens3_out,GPIO.OUT)
 GPIO.setup(sens3_in,GPIO.IN)
 #センサ4
-GPIO.setup(sens4_out,GPIO.OUT)
-GPIO.setup(sens4_in,GPIO.IN)
+#GPIO.setup(sens4_out,GPIO.OUT)
+#GPIO.setup(sens4_in,GPIO.IN)
+
+print("よばれてますよ")
 
 # detect temperature in C
 def readTemp():
@@ -115,6 +119,10 @@ def readSonic(sensor, temp):
 
 
         elif sensor == 4:
+            #センサ4
+            GPIO.setup(sens4_out,GPIO.OUT)
+            GPIO.setup(sens4_in,GPIO.IN)
+            
             GPIO.output(sens4_out, GPIO.LOW) 
             time.sleep(0.3)
             # send a 10us plus to Trigger
@@ -126,6 +134,7 @@ def readSonic(sensor, temp):
                 signaloff = time.time()
             while GPIO.input(sens4_in) == 1:
                 signalon = time.time()
+            GPIO.cleanup()
 
         else:
             print("Incorrect usonic() function varible.")
@@ -139,7 +148,7 @@ def readSonic(sensor, temp):
         
         # re-calculate isLoop to decide whether go out from while roop
 
-        print(distance)
+        #print(distance)
         isLoop = (signaloff == 0.0) | (distance >200.0)
 
     # return the distance of an object in front of the sensor in cm

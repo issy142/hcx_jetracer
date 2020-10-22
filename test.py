@@ -1,4 +1,6 @@
+print("するよ")
 import dis_4sens
+print("したよ")
 import RPi.GPIO as GPIO
 #from jetracer.nvidia_racecar import NvidiaRacecar
 
